@@ -1,0 +1,51 @@
+{
+    "audio_codec": "opus",
+    "lossless_audio_codec": "flac",
+    "scan_format": "webp",
+    "lossless_scan_format": "png",
+
+    "opus_config": {
+        "bitrate": 128
+    },
+    "usac_config": {
+        "preset": 5
+    },
+    "aac_config": {
+        "bitrate": 128,
+        "he": false
+    },
+    "mp3_config": {
+        "bitrate": 320,
+        "joint": true
+    },
+    "vorbis_config": {
+        "bitrate": 192
+    },
+    "flac_config": {
+        "compression_level": 8
+    },
+    "wavpack_config": {
+        "compression_level": 6
+    },
+    "tak_config": {
+        "preset": "p4m"
+    },
+    "webp_config": {
+        "quality": 78
+    },
+    "jpeg_config": {
+        "qscale": 2
+    },
+    "png_config": {
+        "compression_level": 100
+    },
+
+    "executable": {
+        "ffmpeg": "C:\\Users\\Admin\\Desktop\\tools\\ffmpeg.exe",
+        "ffprobe": "C:\\Users\\Admin\\Desktop\\tools\\ffprobe.exe",
+        "qaac": "C:\\Users\\Admin\\Desktop\\tools\\qaac.exe",
+        "exhale": "C:\\Users\\Admin\\Desktop\\tools\\exhale.exe",
+        "takc": "C:\\Users\\Admin\\Desktop\\tools\\takc.exe",
+        "mp4als": "C:\\Users\\Admin\\Desktop\\tools\\mp4als.exe"
+    }
+}
