@@ -59,42 +59,43 @@ class CueContentParser:
                         break
 
     def _global_rem(self, group):
-        self.global_metadata[group.group(1).strip('"').lower()] = group.group(2).strip('"')
+        self.global_metadata[group.group(1).strip().strip('"').lower()] = group.group(2).strip().strip('"')
 
     def _global_file(self, _):
         self.state = 'track'
 
     def _global_catalog(self, group):
-        self.global_metadata['catalog'] = group.group(1).strip('"')
+        self.global_metadata['catalog'] = group.group(1).strip().strip('"')
 
     def _global_performer(self, group):
-        self.global_metadata['performer'] = group.group(1).strip('"')
+        self.global_metadata['performer'] = group.group(1).strip().strip('"')
 
     def _global_songwriter(self, group):
-        self.global_metadata['songwriter'] = group.group(1).strip('"')
+        self.global_metadata['songwriter'] = group.group(1).strip().strip('"')
 
     def _global_title(self, group):
-        self.global_metadata['album'] = group.group(1).strip('"')
+        self.global_metadata['album'] = group.group(1).strip().strip('"')
 
     def _track_performer(self, group):
-        self.tracks[-1].setdefault('metadata', {})['performer'] = group.group(1).strip('"')
+        self.tracks[-1].setdefault('metadata', {})['performer'] = group.group(1).strip().strip('"')
 
     def _track_title(self, group):
         illegal_chars = r'\/:*?"<>|'
-        title = group.group(1).strip('"')
+        title = group.group(1).strip().strip('"')
         for c in illegal_chars:
             title = title.replace(c, '_')
         self.tracks[-1]['title'] = title
-        self.tracks[-1].setdefault('metadata', {})['title'] = group.group(1).strip('"')
+        self.tracks[-1].setdefault('metadata', {})['title'] = group.group(1).strip().strip('"')
 
     def _track_songwriter(self, group):
-        self.tracks[-1].setdefault('metadata', {})['songwriter'] = group.group(1).strip('"')
+        self.tracks[-1].setdefault('metadata', {})['songwriter'] = group.group(1).strip().strip('"')
 
     def _track_isrc(self, group):
-        self.tracks[-1].setdefault('metadata', {})['isrc'] = group.group(1).strip('"')
+        self.tracks[-1].setdefault('metadata', {})['isrc'] = group.group(1).strip().strip('"')
 
     def _track_rem(self, group):
-        self.tracks[-1].setdefault('metadata', {})[group.group(1).strip('"').lower()] = group.group(2).strip('"')
+        self.tracks[-1].setdefault('metadata', {})[group.group(1).strip().strip('"').lower()] = group.group(
+            2).strip().strip('"')
 
     def _track_track(self, group):
         idx = int(group.group(1))
