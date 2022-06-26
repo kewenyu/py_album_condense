@@ -23,10 +23,12 @@ import re
 
 
 class CueContentParser:
-    def __init__(self, content):
+    def __init__(self, file_name, content):
         self.content = content
         self.state = 'global'
-        self.global_metadata = {}
+        self.global_metadata = {
+            'title': file_name,
+        }
         self.tracks = []
         self._parse_cue_file()
 
@@ -95,13 +97,16 @@ class CueContentParser:
         self.tracks[-1].setdefault('metadata', {})[group.group(1).strip('"').lower()] = group.group(2).strip('"')
 
     def _track_track(self, group):
+        idx = int(group.group(1))
         self.tracks.append({
-            'idx': int(group.group(1)),
+            'idx': idx,
             'start_time': '',
             'end_time': '',
             'metadata': self.global_metadata.copy(),
         })
-        self.tracks[-1]['metadata']['track'] = int(group.group(1))
+        self.tracks[-1]['metadata']['track'] = idx
+        self.tracks[-1]['metadata']['title'] = f"{self.tracks[-1]['metadata']['title']} {idx:02d}"
+        self.tracks[-1]['title'] = self.tracks[-1]['metadata']['title']
 
         if (track_idx := int(group.group(1))) != (track_num := len(self.tracks)):
             raise RuntimeError(f'inconsistent track number: track_idx: {track_idx}, track_nums: {track_num}')

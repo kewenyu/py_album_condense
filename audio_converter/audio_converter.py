@@ -51,7 +51,7 @@ class AudioConverter(metaclass=abc.ABCMeta):
     def _get_cue_tracks(self):
         cue_path = os.path.splitext(self.file_path)[0] + '.cue'
         cue_content = CueFileLoader(cue_path).get_content()
-        tracks = CueContentParser(cue_content).get_tracks()
+        tracks = CueContentParser(os.path.splitext(os.path.basename(self.file_path))[0], cue_content).get_tracks()
         return tracks
 
 
